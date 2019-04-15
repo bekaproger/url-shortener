@@ -18,11 +18,12 @@ class UrlController extends Controller
         $this->service = $service;
     }
 
-    public function index()
-    {
-
-    }
-
+    /**
+     * Redirect the user to the actual url address
+     *
+     * @param $short_code
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     */
     public function getUrl($short_code)
     {
         try{

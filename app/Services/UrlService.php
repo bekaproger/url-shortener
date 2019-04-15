@@ -14,10 +14,23 @@ use Illuminate\Http\Request;
 class UrlService
 {
 
+    /**
+     * Chars to build random string
+     */
     protected const CHARS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+    /**
+     * length of the random string
+     */
     protected const LENGTH = 6;
 
+    /**
+     * Handle Request and create url
+     *
+     * @param Request $request
+     * @return Url
+     * @throws \Exception
+     */
     public function handleUrl(Request $request)
     {
         if(!$this->checkUrl($request->url)){
@@ -42,7 +55,6 @@ class UrlService
 
         return $url;
     }
-
     protected function makeShortCode()
     {
         $max_length  = strlen(self::CHARS) - 1;
@@ -54,6 +66,12 @@ class UrlService
         return $short_code;
     }
 
+    /**
+     * Check if the given url address is active and valid
+     *
+     * @param string $url
+     * @return bool
+     */
     protected function checkUrl(string $url)
     {
         $ch = curl_init();
@@ -67,6 +85,13 @@ class UrlService
         return (!empty($response) && $response != 404);
     }
 
+    /**
+     * Get the full url by its short_code
+     *
+     * @param $short_code
+     * @return mixed
+     * @throws \Exception
+     */
     public function getUrl($short_code)
     {
         $url = Url::where('short_code', $short_code)->first();
@@ -82,6 +107,12 @@ class UrlService
         return $url;
     }
 
+    /**
+     * Check if the given url is expired
+     *
+     * @param $url
+     * @return bool
+     */
     public function isExpired($url)
     {
         if($url->expires){
