@@ -99,6 +99,7 @@ class UrlService
             throw new \Exception('Url not found', 404);
         }
         if($this->isExpired($url)){
+            $url->delete();
             throw new \Exception('Url expired', 400);
         }
         $url->count += 1;
