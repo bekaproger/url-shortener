@@ -21,7 +21,7 @@ class UrlService
     public function handleUrl(Request $request)
     {
         if(!$this->checkUrl($request->url)){
-            throw new \Exception('Url invalid', 422);
+            throw new \Exception('Invalid Url', 422);
         }
 
         $url = new Url();
@@ -39,6 +39,8 @@ class UrlService
 
         $url->short_code = $this->makeShortCode();
         $url->save();
+
+        return $url;
     }
 
     protected function makeShortCode()

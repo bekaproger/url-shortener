@@ -59,7 +59,6 @@
 
 
         </div>
-        {{now()->unix()}}
 
 </div>
 @endsection

@@ -25,7 +25,6 @@ class UrlPostRequest extends FormRequest
     {
         return [
             'url' => 'required|url',
-            'expiration' => 'sometimes|date'
         ];
     }
 }

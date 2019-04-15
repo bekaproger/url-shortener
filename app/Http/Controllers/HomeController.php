@@ -25,9 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $next_week = now() ->addWeek();
+        $next_week = now()->addWeek();
         $next_month = now()->addMonth();
-        $urls = Auth::user()->userUrls;
+        $urls = Auth::user()->userUrls()->orderByDesc('created_at')->get();
         return view('home', compact(['next_week', 'next_month', 'urls']));
     }
 }
